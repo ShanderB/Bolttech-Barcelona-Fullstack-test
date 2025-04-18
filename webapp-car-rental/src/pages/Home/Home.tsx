@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
-import './home.css'; // Arquivo CSS para estilização
-import { useNavigate } from 'react-router-dom';
+import './home.css';
+import BookingPage from '../Booking/Booking';
 
 interface Car {
   _id: number;
@@ -18,12 +18,6 @@ const HomePage = () => {
   const [endDate, setEndDate] = useState('2025-04-10');
   const [selectedCar, setSelectedCar] = useState<Car | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const navigate = useNavigate();
-
-  const handleBooking = () => {
-    closeModal();
-    navigate('/success', { state: { car: selectedCar } });
-  };
 
   const fetchCars = () => {
     if (!startDate || !endDate) {
@@ -37,14 +31,14 @@ const HomePage = () => {
       .catch(error => console.error('Error fetching cars:', error));
   };
 
-  const openModal = (car: Car) => {
+  const handleCarClick = (car: Car) => {
     setSelectedCar(car);
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
-    setSelectedCar(null);
     setIsModalOpen(false);
+    setSelectedCar(null);
   };
 
   return (
@@ -80,7 +74,7 @@ const HomePage = () => {
         </thead>
         <tbody>
           {cars.map(car => (
-            <tr key={car._id} onClick={() => openModal(car)}>
+            <tr key={car._id} onClick={() => handleCarClick(car)}>
               <td>{car.brand}</td>
               <td>{car.model}</td>
               <td>{car.price}</td>
@@ -91,17 +85,12 @@ const HomePage = () => {
       </table>
 
       {isModalOpen && selectedCar && (
-        <div className="modal">
-          <div className="modal-content">
-            <h2>Car Details</h2>
-            <p><strong>Brand:</strong> {selectedCar.brand}</p>
-            <p><strong>Model:</strong> {selectedCar.model}</p>
-            <p><strong>Price per day:</strong> ${selectedCar.price}</p>
-            <p><strong>Total Price:</strong> ${selectedCar.totalPrice}</p>
-            <button className="booking-button" onClick={handleBooking}>Confirm Booking</button>
-            <button className="close-button" onClick={closeModal}>Close</button>
-          </div>
-        </div>
+        <BookingPage
+          car={selectedCar}
+          startDate={startDate}
+          endDate={endDate}
+          closeModal={closeModal}
+        />
       )}
     </div>
   );

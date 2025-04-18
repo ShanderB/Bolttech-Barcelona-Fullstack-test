@@ -22,18 +22,26 @@ export const createBooking = async (req: any, res: any) => {
   const existingBooking = await Booking.findOne({
     userId,
     $or: [
+      //se uma data fizer overlap com outra booking, não pode ser criada
       { startDate: { $lte: end }, endDate: { $gte: start } },
     ],
   });
 
-  if (existingBooking) {
-    return res.status(400).json({ message: 'User already has a booking for the selected dates' });
-  }
+  // if (existingBooking) {
+  //   return res.status(400).json({ message: 'User already has a booking for the selected dates' });
+  // }
 
-  const car = await Car.findById(carId);
+  const car = await Car.findById(carId).select('_id stock');
   if (!car) {
     return res.status(404).json({ message: 'Car not found' });
   }
+
+  if (!car?.stock) {
+    return res.status(400).json({ message: 'Car is not available' });
+  }
+
+  // const session = await mongoose.startSession();
+  // session.startTransaction();
 
   const booking = new Booking({
     carId,
@@ -43,10 +51,25 @@ export const createBooking = async (req: any, res: any) => {
     licenseValid,
   });
 
-  await booking.save()
+  //TODO try to fix transaciton
+  // await booking.save({ session }).then(async () => {
+  //   car.stock! -= 1;
+  //   await car.save({ session }).then(async () => {
+  //     await session.commitTransaction();
+  //     session.endSession();
+  //   })
+  // }).catch(async (error) => {
+  //   console.log('Error saving booking:', error);  
+  //   await session.abortTransaction();
+  //   session.endSession();
+  // });
+
+  await booking.save();
+  car.stock! -= 1;
+  await car.save();
+
   // validate correctly with then and catch
-  //remove car from stock
   //add error test
   res.status(201).json({ message: 'Booking created', booking });
-  
+
 };

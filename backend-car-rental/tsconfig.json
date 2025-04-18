@@ -18,9 +18,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
+    "types": ["node", "jest"]
   },
   "include": [
     "src",
-    "node"
+    "node",
+    "test"
   ]
 }

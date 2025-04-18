@@ -5,6 +5,7 @@
   "scripts": {
     "start": "ts-node-dev src/app.ts",
     "docker": "docker-compose up",
+    "seed": "ts-node-dev src/seed.ts",
     "dev": "ts-node-dev src/app.ts",
     "test": "jest --detectOpenHandles --verbose --forceExit --runInBand --logHeapUsage --coverage"
   },

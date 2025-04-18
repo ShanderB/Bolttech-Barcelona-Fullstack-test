@@ -75,7 +75,7 @@ export const getCars = async (req: any, res: any) => {
       _id: car._id,
       brand: car.brand,
       model: car.model,
-      stock: car.stock,
+      stock: car.stock! > 0 ? true : false,
       price: dailyPrice,
       totalPrice
     };

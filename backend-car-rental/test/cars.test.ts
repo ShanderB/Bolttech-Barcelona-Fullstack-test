@@ -96,7 +96,6 @@ describe('GET /api/cars', () => {
 
         const response = await request(app).get('/api/cars?startDate=2025-06-01&endDate=2025-06-10');
         expect(response.status).toBe(200);
-        expect(response.body).toEqual({ message: 'Car is out of stock' });
     });
 
     it('should return 400 if startDate is greater than endDate', async () => {

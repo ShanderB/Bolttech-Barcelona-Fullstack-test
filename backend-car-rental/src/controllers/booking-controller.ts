@@ -22,7 +22,7 @@ export const createBooking = async (req: any, res: any) => {
   const existingBooking = await Booking.findOne({
     userId,
     $or: [
-      //se uma data fizer overlap com outra booking, não pode ser criada
+      // if data overlaps, return error
       { startDate: { $lte: end }, endDate: { $gte: start } },
     ],
   });
@@ -68,8 +68,8 @@ export const createBooking = async (req: any, res: any) => {
   car.stock! -= 1;
   await car.save();
 
-  // validate correctly with then and catch
-  //add error test
+  //TODO validate correctly with then and catch
+  //TODO add error test
   res.status(201).json({ message: 'Booking created', booking });
 
 };

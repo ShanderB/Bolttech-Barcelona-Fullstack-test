@@ -83,8 +83,8 @@ export const getCars = async (req: any, res: any) => {
 
 
 
-  //add error test
-  //add status and validation 
-  //add DTO
+  //TODO add error test
+  //TODO add status and validation 
+  //TODO add DTO
   res.json(carsWithPrices);
 };

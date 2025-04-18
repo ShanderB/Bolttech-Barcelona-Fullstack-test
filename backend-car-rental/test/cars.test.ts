@@ -44,13 +44,8 @@ describe('GET /api/cars', () => {
                 brand: 'Toyota',
                 model: 'Yaris',
                 stock: 3,
-                dailyPrice: 98.43,
                 totalPrice: 984.3,
-                prices: {
-                    mid: 76.89,
-                    off: 53.65,
-                    peak: 98.43,
-                },
+                price: 98.43,
             },
         ]);
     });
@@ -70,13 +65,8 @@ describe('GET /api/cars', () => {
                 brand: 'Toyota',
                 model: 'Yaris',
                 stock: 3,
-                dailyPrice: 98.43,
                 totalPrice: 98.43,
-                prices: {
-                    mid: 76.89,
-                    off: 53.65,
-                    peak: 98.43,
-                },
+                price: 98.43,
             },
         ]);
     });
@@ -88,7 +78,7 @@ describe('GET /api/cars', () => {
                 brand: 'Toyota',
                 model: 'Yaris',
                 stock: 0,
-                prices: { peak: 98.43, mid: 76.89, off: 53.65 },
+                price: 98.43,
             },
         ];
 

@@ -37,37 +37,54 @@ export const getCars = async (req: any, res: any) => {
     return res.status(404).json({ message: 'No cars found' });
   }
 
-  const bookings = await Booking.find({
-    $or: [
-      { startDate: { $lte: end }, endDate: { $gte: start } },
-    ],
-  });
+  // const bookings = await Booking.find({
+  //   $or: [
+  //     { startDate: { $lte: end }, endDate: { $gte: start } },
+  //   ],
+  // });
 
-  if (!bookings) {
-    return res.status(404).json({ message: 'No bookings found' });
-  }
+  // if (!bookings) {
+  //   return res.status(404).json({ message: 'No bookings found' });
+  // }
 
-  const bookedCarIds = bookings
-  .filter((booking) => booking.carId !== null && booking.carId !== undefined)
-  .map((booking) => booking.carId!.toString());
+  // const bookedCarIds = bookings
+  // .filter((booking) => booking.carId !== null && booking.carId !== undefined)
+  // .map((booking) => booking.carId!.toString());
 
-  const availableCars = cars.filter((car) => !bookedCarIds.includes(car._id.toString()));
+  // const availableCars = cars.filter((car) => !bookedCarIds.includes(car._id.toString()));
 
-  const carsWithPrices = availableCars.map((car) => {
-    // [start date, end date] or ]start date, end date]?
-    const days = Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+  // const carsWithPrices = availableCars.map((car) => {
+  //   // [start date, end date] or ]start date, end date]?
+  //   const days = Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+  // const dailyPrice = car.prices?.[season] ?? 0;
+  //   const totalPrice = parseFloat((dailyPrice * days).toFixed(2));
+
+  //   return {
+  //     ...car,
+  //     dailyPrice,
+  //     totalPrice,
+  //   };
+  // });
+
+  const carsWithPrices = cars.map((car) => {
     const dailyPrice = car.prices?.[season] ?? 0;
-    const totalPrice = parseFloat((dailyPrice * days).toFixed(2));
-
+    const days = Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)) + 1; // Calculate total days
+    const totalPrice = parseFloat((dailyPrice * days).toFixed(2)); // Calculate total price for the rental period
+  
     return {
-      ...car,
-      dailyPrice,
-      totalPrice,
+      _id: car._id,
+      brand: car.brand,
+      model: car.model,
+      stock: car.stock,
+      price: dailyPrice,
+      totalPrice
     };
   });
 
+
+
   //add error test
   //add status and validation 
-
+  //add DTO
   res.json(carsWithPrices);
 };

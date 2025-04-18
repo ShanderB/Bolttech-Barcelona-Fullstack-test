@@ -19,7 +19,7 @@ interface BookingPageProps {
 const BookingPage: React.FC<BookingPageProps> = ({ car, startDate, endDate, closeModal }) => {
   const [formData, setFormData] = useState({
     userId: '',
-    licenseValid: false,
+    licenseValid: true,
   });
 
   const navigate = useNavigate();

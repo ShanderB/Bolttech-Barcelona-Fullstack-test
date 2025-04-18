@@ -58,7 +58,7 @@ export const createBooking = async (req: any, res: any) => {
   // });
 
   await booking.save();
-  const decrementErrorMessage =  await decrementCarStock(carId, res);
+  const decrementErrorMessage =  await decrementCarStock(carId);
 
   if(decrementErrorMessage) {
     return res.status(400).json({ message: decrementErrorMessage });

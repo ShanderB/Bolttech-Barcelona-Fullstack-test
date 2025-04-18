@@ -27,9 +27,9 @@ export const createBooking = async (req: any, res: any) => {
     ],
   });
 
-  // if (existingBooking) {
-  //   return res.status(400).json({ message: 'User already has a booking for the selected dates' });
-  // }
+  if (existingBooking) {
+    return res.status(400).json({ message: 'User already has a booking for the selected dates' });
+  }
 
   const car = await Car.findById(carId).select('_id stock');
   if (!car) {

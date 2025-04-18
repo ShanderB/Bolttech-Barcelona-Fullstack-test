@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import routes from './routes/index';
+import { errorHandler } from './middleware/error-handler';
 
 const app = express();
 const PORT = 5000;
@@ -15,5 +16,7 @@ if (process.env.NODE_ENV !== 'test') {
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.error(err));
 }
+
+app.use(errorHandler);
 
 export default app;

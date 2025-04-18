@@ -66,5 +66,8 @@ export const getCars = async (req: any, res: any) => {
     };
   });
 
+  //add error test
+  //add status and validation 
+
   res.json(carsWithPrices);
 };

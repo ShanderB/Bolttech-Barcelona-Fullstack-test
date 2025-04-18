@@ -20,6 +20,7 @@ const HomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchCars = () => {
+    //todo add css for the button
     if (!startDate || !endDate) {
       alert('Please select both start and end dates.');
       return;
@@ -74,7 +75,10 @@ const HomePage = () => {
         </thead>
         <tbody>
           {cars.map(car => (
-            <tr key={car._id} onClick={() => handleCarClick(car)}>
+            <tr key={car._id}
+            onClick={() => car.stock ? handleCarClick(car) : undefined}
+            className={!car.stock ? 'out-of-stock' : ''}
+            >
               <td>{car.brand}</td>
               <td>{car.model}</td>
               <td>{car.price}</td>

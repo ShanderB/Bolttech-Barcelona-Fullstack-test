@@ -27,13 +27,7 @@ describe('Routes', () => {
     it('should call the createBooking controller for the /bookings route', async () => {
         const response = await request(app)
             .post('/api/bookings')
-            .send({
-                carId: '1',
-                userId: '123',
-                startDate: '2025-06-01',
-                endDate: '2025-06-10',
-                licenseValid: true,
-            });
+            .send();
         expect(response.status).toBe(201);
         expect(response.body).toEqual({ message: 'Mocked createBooking' });
     });

@@ -8,38 +8,62 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .modal-content {
+}
+
+.modal-content {
     background: white;
     padding: 20px;
     border-radius: 5px;
     width: 400px;
     text-align: center;
-  }
-  
-  .booking-button, .close-button {
+}
+
+.booking-button,
+.close-button {
     padding: 10px 20px;
     margin: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
-  .booking-button {
+}
+
+.booking-button {
     background-color: #28a745;
     color: white;
-  }
-  
-  .booking-button:hover {
+}
+
+.booking-button:hover {
     background-color: #218838;
-  }
-  
-  .close-button {
+}
+
+.close-button {
     background-color: #dc3545;
     color: white;
-  }
-  
-  .close-button:hover {
+}
+
+.close-button:hover {
     background-color: #c82333;
-  }
+}
+
+body.dark .modal-content {
+    background-color: #121212;
+    color: white;
+}
+
+body.dark .booking-button {
+    background-color: #28a745;
+    color: white;
+}
+
+body.dark .booking-button:hover {
+    background-color: #218838;
+}
+
+body.dark .close-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+body.dark .close-button:hover {
+    background-color: #c82333;
+}

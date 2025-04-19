@@ -10,13 +10,11 @@ export const getCars = async (req: Request, res: Response): Promise<Response> =>
     return res.status(400).json({ message: 'Start date and end date are required' });
   } else if (startDate > endDate) {
     return res.status(400).json({ message: 'Start date cannot be greater than end date' });
-  } else if (typeof startDate !== 'string' || typeof endDate !== 'string') {
-    return res.status(400).json({ message: 'Start date and end date must be strings' });
   }
 
-  const { start, end, season } = parseDatesAndSeason(startDate, endDate);
+  const { start, end, season } = parseDatesAndSeason(startDate as string, endDate as string);
 
-  const cars = await Car.find().lean<CarType[]>();
+  const cars = await Car.find<CarType>();
 
   if (!cars || cars.length === 0) {
     return res.status(404).json({ message: 'No cars found' });
@@ -32,7 +30,7 @@ export const decrementCarStock = async (carId: string): Promise<string | undefin
     { _id: carId, stock: { $gt: 0 } },
     { $inc: { stock: -1 } },
     { new: true }
-  ).lean();
+  );
 
   if (!updatedCar) {
     return 'Car not found or not available';

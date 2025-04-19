@@ -11,8 +11,8 @@ import CustomTable from '../../components/Table/CustomTable';
 
 const HomePage = () => {
   const [cars, setCars] = useState<Car[]>([]);
-  const [startDate, setStartDate] = useState('2025-04-01');
-  const [endDate, setEndDate] = useState('2025-04-10');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
   const [selectedCar, setSelectedCar] = useState<Car | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { isDarkMode, toggleTheme } = useTheme();
@@ -39,22 +39,21 @@ const HomePage = () => {
 
   return (
     <div
+      className="home-container"
       style={{
-        padding: '20px',
         backgroundColor: isDarkMode ? HomeColors.DarkBackground : HomeColors.LightBackground,
         color: isDarkMode ? HomeColors.DarkText : HomeColors.LightText,
       }}
     >
-      <Switch checked={isDarkMode} onChange={toggleTheme} />
-      <Typography
-        variant="h4"
-        gutterBottom
-        style={{
-          color: isDarkMode ? HomeColors.TitleDark : HomeColors.TitleLight,
-        }}
-      >
-        Available Cars
-      </Typography>
+      <div className="home-header">
+        <Typography variant="h4" gutterBottom className="home-title">
+          Available Cars
+        </Typography>
+        <div className="theme-switch">
+          <Switch checked={isDarkMode} onChange={toggleTheme} />
+        </div>
+      </div>
+
       <div className="date-picker-container">
         <CustomDatePicker
           label="Start Date"

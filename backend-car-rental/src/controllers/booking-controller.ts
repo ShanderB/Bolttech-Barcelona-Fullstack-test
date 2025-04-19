@@ -11,6 +11,8 @@ export const createBooking = async (req: any, res: any) => {
   const start = new Date(startDate);
   const end = new Date(endDate);
 
+  //adicionar função para validar tudo e ir adicionando mensagens de erro.
+
   if (start >= end) {
     return res.status(400).json({ message: 'Start date must be before end date' });
   }
@@ -30,8 +32,6 @@ export const createBooking = async (req: any, res: any) => {
   if (existingBooking) {
     return res.status(400).json({ message: 'User already has a booking for the selected dates' });
   }
-
-
 
   // const session = await mongoose.startSession();
   // session.startTransaction();
@@ -64,8 +64,6 @@ export const createBooking = async (req: any, res: any) => {
     return res.status(400).json({ message: decrementErrorMessage });
   }
 
-  //TODO validate correctly with then and catch
-  //TODO add error test
   res.status(201).json({ message: 'Booking created', booking });
 
 };

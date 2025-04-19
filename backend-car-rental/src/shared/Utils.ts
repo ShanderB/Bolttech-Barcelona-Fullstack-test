@@ -29,3 +29,15 @@ export const getSeason = (date: Date) => {
         return 'off';
     }
 };
+
+export const parseDatesAndSeason = (startDate: string, endDate: string) => {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    if (start > end) {
+        throw new Error('Start date cannot be greater than end date');
+    }
+
+    const season = getSeason(start);
+    return { start, end, season };
+};

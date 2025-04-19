@@ -2,12 +2,16 @@ import './home.css'
 import { useState } from 'react';
 import BookingPage from '../Booking/Booking';
 import { useTheme } from '../../shared/ThemeContext';
-import { Typography, Switch } from '@mui/material';
+import { Typography } from '@mui/material';
 import { fetchCars } from '../../services/car-service';
 import { Car, HomeColors } from './Types/HomeType';
 import CustomButton from '../../components/Button/CustomButton';
 import CustomDatePicker from '../../components/DatePicker/CustomDatePicker';
 import CustomTable from '../../components/Table/CustomTable';
+import { FormControlLabel, Switch, useTheme as useMuiTheme } from '@mui/material';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+
 
 const HomePage = () => {
   const [cars, setCars] = useState<Car[]>([]);
@@ -49,7 +53,17 @@ const HomePage = () => {
         <Typography variant="h4" gutterBottom className="home-title">
           Available Cars
         </Typography>
-        <div className="theme-switch">
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            right: 0,
+            transform: 'translateY(-50%)',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          {isDarkMode ? <Brightness4Icon /> : <Brightness7Icon />}
           <Switch checked={isDarkMode} onChange={toggleTheme} />
         </div>
       </div>

@@ -94,3 +94,22 @@
   pointer-events: none;
   opacity: 0.6;
 }
+
+.home-container.dark {
+  background-color: #121212;
+  color: white;
+}
+
+.theme-toggle-button {
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+}
+
+.theme-toggle-button:hover {
+  background-color: #0056b3;
+}

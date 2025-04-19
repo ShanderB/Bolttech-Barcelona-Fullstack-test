@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import './home.css';
 import BookingPage from '../Booking/Booking';
+import { useTheme } from '../../shared/ThemeContext';
 
 interface Car {
   _id: number;
@@ -18,6 +19,8 @@ const HomePage = () => {
   const [endDate, setEndDate] = useState('2025-04-10');
   const [selectedCar, setSelectedCar] = useState<Car | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isDarkMode, toggleTheme } = useTheme();
+
 
   const fetchCars = () => {
     //todo add css for the button
@@ -43,7 +46,10 @@ const HomePage = () => {
   };
 
   return (
-    <div className="home-container">
+    <div className={`home-container ${isDarkMode ? 'dark' : ''}`}>
+      <button onClick={toggleTheme} className="theme-toggle-button">
+        {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+      </button>
       <h1>Available Cars</h1>
       <div className="filters">
         <label>
@@ -76,8 +82,8 @@ const HomePage = () => {
         <tbody>
           {cars.map(car => (
             <tr key={car._id}
-            onClick={() => car.stock ? handleCarClick(car) : undefined}
-            className={!car.stock ? 'out-of-stock' : ''}
+              onClick={() => car.stock ? handleCarClick(car) : undefined}
+              className={!car.stock ? 'out-of-stock' : ''}
             >
               <td>{car.brand}</td>
               <td>{car.model}</td>

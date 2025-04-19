@@ -1,16 +1,13 @@
+import './home.css'
 import { useState } from 'react';
 import BookingPage from '../Booking/Booking';
 import { useTheme } from '../../shared/ThemeContext';
-import {
-  Typography,
-  Switch,
-} from '@mui/material';
+import { Typography, Switch } from '@mui/material';
 import { fetchCars } from '../../services/car-service';
-import { Car } from './Types/HomeType';
+import { Car, HomeColors } from './Types/HomeType';
 import CustomButton from '../../components/Button/CustomButton';
 import CustomDatePicker from '../../components/DatePicker/CustomDatePicker';
 import CustomTable from '../../components/Table/CustomTable';
-
 
 const HomePage = () => {
   const [cars, setCars] = useState<Car[]>([]);
@@ -41,20 +38,24 @@ const HomePage = () => {
   };
 
   return (
-    <div style={{ padding: '20px', backgroundColor: isDarkMode ? '#121212' : '#fff', color: isDarkMode ? '#fff' : '#000' }}>
+    <div
+      style={{
+        padding: '20px',
+        backgroundColor: isDarkMode ? HomeColors.DarkBackground : HomeColors.LightBackground,
+        color: isDarkMode ? HomeColors.DarkText : HomeColors.LightText,
+      }}
+    >
       <Switch checked={isDarkMode} onChange={toggleTheme} />
-      <Typography variant="h4" gutterBottom style={{
-        color: isDarkMode ? '#333' : '#000',
-      }}>
+      <Typography
+        variant="h4"
+        gutterBottom
+        style={{
+          color: isDarkMode ? HomeColors.TitleDark : HomeColors.TitleLight,
+        }}
+      >
         Available Cars
       </Typography>
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        gap: '10px',
-        marginBottom: '20px',
-      }}>
+      <div className="date-picker-container">
         <CustomDatePicker
           label="Start Date"
           value={startDate}
@@ -68,10 +69,7 @@ const HomePage = () => {
           isDarkMode={isDarkMode}
         />
       </div>
-      <CustomButton
-        label="Search"
-        onClick={handleFetchCars}
-      />
+      <CustomButton label="Search" onClick={handleFetchCars} />
       <CustomTable
         data={cars}
         columns={[

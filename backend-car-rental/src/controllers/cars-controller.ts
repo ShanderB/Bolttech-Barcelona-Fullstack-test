@@ -15,7 +15,7 @@ export const getCars = async (req: any, res: any) => {
   const cars = await Car.find();
   //todo lean
 
-  if (!cars) {
+  if (!cars || cars.length === 0) {
     return res.status(404).json({ message: 'No cars found' });
   }
 

@@ -11,7 +11,7 @@ export const createBooking = async (req: any, res: any) => {
   const start = new Date(startDate);
   const end = new Date(endDate);
 
-  //adicionar função para validar tudo e ir adicionando mensagens de erro.
+  // add function to validate everything and add error messages
 
   if (start >= end) {
     return res.status(400).json({ message: 'Start date must be before end date' });
@@ -64,6 +64,5 @@ export const createBooking = async (req: any, res: any) => {
     return res.status(400).json({ message: decrementErrorMessage });
   }
 
-  res.status(201).json({ message: 'Booking created', booking });
-
+  res.status(201).json({ message: 'Booking created' });
 };

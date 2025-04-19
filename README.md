@@ -22,6 +22,7 @@ I developed both the frontend and backend for this project. Here are some key po
 - I created all the backend tests, achieving 100% test coverage.
 - I added as many validations as possible to ensure data integrity.
 - When starting the Docker containers, the MongoDB database is built, a seed script is executed to populate initial data, and then the backend starts.
+- When a booking is made, the backend saves the booking and removes 1 unit from the car's stock in the car table. I initially tried to implement this using transactions, but it wasn't working correctly. To avoid spending too much time, I implemented it in a way that I fully understand is not ideal: saving the booking and updating the car stock separately.
 
 ### Frontend
 - After the backend and database initialization, the frontend build process starts. Once completed, the application is ready to use with pre-seeded data.
@@ -31,7 +32,7 @@ I developed both the frontend and backend for this project. Here are some key po
 - I am using browser cookies to persist the dark mode setting.
 
 ### General
-- I followed the SOLID principles for both frontend and TDD to backend development.
+- I followed the SOLID principles for both frontend and TDD in the backend development.
 - For the "License Valid" feature, I couldn't fully understand its requirements. Without a Product Owner (PO) to clarify, I implemented a field where users can input an "ID". If a booking is attempted with the same ID, an error is triggered. I believe this is a reasonable approach, but I would appreciate feedback on this implementation. I also tried researching on Google, but it wasn't very clear to me how a valid U.S. license should work.
 - Regarding the design, I am not very skilled in this area when we talk about creating something out of blue, so I used AI chat tools to generate some screen ideas for me. I didn't have any particularly good images, so I mixed elements from different suggestions and left it as it is. The AI-generated design served as a kind of Figma provided by a PO.
 - The dark mode feature was something I had never implemented before, so I used GitHub Copilot to help generate it for me.
@@ -43,3 +44,4 @@ I developed both the frontend and backend for this project. Here are some key po
 - Implementing frontend tests to ensure the same level of reliability as the backend.
 - Adding a listing of all bookings.
 - Creating a separate schema to handle bookings, containing booking-specific data, instead of directly reducing the stock within the car schema.
+- Refactoring the booking process to use transactions properly, ensuring atomicity when saving the booking and updating the car stock. I tried adding transactions, but it wasn't working correctly. I would need to spend more time on this to ensure it works as expected.

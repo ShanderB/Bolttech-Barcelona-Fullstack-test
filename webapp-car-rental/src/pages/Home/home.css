@@ -100,6 +100,15 @@
   color: white;
 }
 
+.home-container.dark .cars-table tr:hover {
+  background-color: #333333;
+}
+
+.home-container.dark .cars-table th,
+.home-container.dark .cars-table td {
+  border-color: #444444;
+}
+
 .theme-toggle-button {
   padding: 10px 20px;
   margin-bottom: 20px;

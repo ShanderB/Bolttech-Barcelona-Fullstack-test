@@ -31,7 +31,7 @@ I developed both the frontend and backend for this project. Here are some key po
 - I am using browser cookies to persist the dark mode setting.
 
 ### General
-- I followed the SOLID principles for both frontend and backend development.
+- I followed the SOLID principles for both frontend and TDD to backend development.
 - For the "License Valid" feature, I couldn't fully understand its requirements. Without a Product Owner (PO) to clarify, I implemented a field where users can input an "ID". If a booking is attempted with the same ID, an error is triggered. I believe this is a reasonable approach, but I would appreciate feedback on this implementation. I also tried researching on Google, but it wasn't very clear to me how a valid U.S. license should work.
 - Regarding the design, I am not very skilled in this area when we talk about creating something out of blue, so I used AI chat tools to generate some screen ideas for me. I didn't have any particularly good images, so I mixed elements from different suggestions and left it as it is. The AI-generated design served as a kind of Figma provided by a PO.
 - The dark mode feature was something I had never implemented before, so I used GitHub Copilot to help generate it for me.

@@ -41,8 +41,11 @@ const BookingPage: React.FC<BookingPageProps> = ({ car, startDate, endDate, clos
       startDate,
       endDate,
       licenseValid: formData.licenseValid,
+    }).then(() => {
+      navigate('/success', { state: { car } });
+    }).catch((error) => {
+      alert('Error creating booking: ' + error.message);
     });
-    navigate('/success', { state: { car } });
   };
 
   return (

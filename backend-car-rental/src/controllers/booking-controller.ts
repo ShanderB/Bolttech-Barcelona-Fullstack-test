@@ -1,5 +1,5 @@
-import Booking from '../models/book-model';
-import { decrementCarStock } from './cars-controller';
+import Booking from '../models/Book-model';
+import { decrementCarStock } from './Cars-controller';
 
 export const createBooking = async (req: any, res: any) => {
   const { carId, userId, startDate, endDate, licenseValid } = req.body;

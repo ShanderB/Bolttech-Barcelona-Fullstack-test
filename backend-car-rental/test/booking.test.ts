@@ -1,6 +1,6 @@
 import request from 'supertest';
-import Car from '../src/models/car-model';
-import Booking from '../src/models/book-model';
+import Car from '../src/models/Car-model';
+import Booking from '../src/models/Book-model';
 
 import app from '../src/app';
 

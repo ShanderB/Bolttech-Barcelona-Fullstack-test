@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import Car from './models/car-model';
+import Car from './models/Car-model';
 
 const seedCars = async () => {
   const cars = [

@@ -1,5 +1,5 @@
-import Car from '../models/car-model';
 import { calculateCarPrices, getSeason, parseDatesAndSeason } from '../shared/Utils';
+import Car from '../models/Car-model';
 
 export const getCars = async (req: any, res: any) => {
   const { startDate, endDate } = req.query;

@@ -1,7 +1,8 @@
 import Booking from '../models/Book-model';
 import { decrementCarStock } from './Cars-controller';
+import { Request, Response } from 'express';
 
-export const createBooking = async (req: any, res: any) => {
+export const createBooking = async (req: Request, res: Response): Promise<Response> => {
   const { carId, userId, startDate, endDate, licenseValid } = req.body;
 
   if (!carId || !userId || !startDate || !endDate || licenseValid === undefined) {
@@ -11,7 +12,7 @@ export const createBooking = async (req: any, res: any) => {
   const start = new Date(startDate);
   const end = new Date(endDate);
 
-  // add function to validate everything and add error messages
+  //TODO add function to validate everything and add error messages
 
   if (start >= end) {
     return res.status(400).json({ message: 'Start date must be before end date' });
@@ -24,7 +25,7 @@ export const createBooking = async (req: any, res: any) => {
   const existingBooking = await Booking.findOne({
     userId,
     $or: [
-      // if data overlaps, return error
+      //TODO if data overlaps, return error
       { startDate: { $lte: end }, endDate: { $gte: start } },
     ],
   });
@@ -58,11 +59,11 @@ export const createBooking = async (req: any, res: any) => {
   // });
 
   await booking.save();
-  const decrementErrorMessage =  await decrementCarStock(carId);
+  const decrementErrorMessage = await decrementCarStock(carId);
 
-  if(decrementErrorMessage) {
+  if (decrementErrorMessage) {
     return res.status(400).json({ message: decrementErrorMessage });
   }
 
-  res.status(201).json({ message: 'Booking created' });
+  return res.status(201).json({ message: 'Booking created' });
 };

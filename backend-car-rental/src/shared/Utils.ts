@@ -1,4 +1,11 @@
-export const calculateCarPrices = (cars: any[], season: string, start: Date, end: Date) => {
+import { CarType, CarWithPrices, SeasonEnum } from "../types/Types";
+
+export const calculateCarPrices = (
+    cars: CarType[],
+    season: SeasonEnum,
+    start: Date,
+    end: Date
+): CarWithPrices[] => {
     const days = Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)) + 1; // Calculate total days
 
     return cars.map((car) => {
@@ -16,21 +23,21 @@ export const calculateCarPrices = (cars: any[], season: string, start: Date, end
     });
 };
 
-export const getSeason = (date: Date) => {
+export const getSeason = (date: Date): SeasonEnum => {
     //could use moment.js or date-fns for better date handling
     const month = date.getUTCMonth() + 1;
     const day = date.getUTCDate();
 
     if ((month === 6 && day >= 1) || (month === 9 && day <= 15) || (month > 6 && month < 9)) {
-        return 'peak';
+        return SeasonEnum.PEAK;
     } else if ((month === 9 && day > 15) || (month === 10) || (month === 3) || (month === 5) || (month === 4)) {
-        return 'mid';
+        return SeasonEnum.MID;
     } else {
-        return 'off';
+        return SeasonEnum.OFF;
     }
 };
 
-export const parseDatesAndSeason = (startDate: string, endDate: string) => {
+export const parseDatesAndSeason = (startDate: string, endDate: string): { start: Date; end: Date; season: SeasonEnum } => {
     const start = new Date(startDate);
     const end = new Date(endDate);
 

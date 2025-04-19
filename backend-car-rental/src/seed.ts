@@ -1,8 +1,9 @@
 import mongoose from 'mongoose';
 import Car from './models/Car-model';
+import { CarType } from './types/Types';
 
-const seedCars = async () => {
-  const cars = [
+const seedCars = async (): Promise<void> => {
+  const cars: CarType[] = [
     {
       brand: 'Toyota',
       model: 'Yaris',
@@ -36,7 +37,6 @@ const seedCars = async () => {
   ];
 
   try {
-    //todo remove string
     await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/car-rental');
     console.log('Connected to MongoDB');
 

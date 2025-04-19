@@ -8,7 +8,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TextField,
   Typography,
   Paper,
   Switch,
@@ -16,6 +15,7 @@ import {
 import { fetchCars } from '../../services/car-service';
 import { Car } from './Types/HomeType';
 import CustomButton from '../../components/Button/CustomButton';
+import CustomDatePicker from '../../components/DatePicker/CustomDatePicker';
 
 
 const HomePage = () => {
@@ -54,31 +54,30 @@ const HomePage = () => {
       }}>
         Available Cars
       </Typography>
-      <div style={{ marginBottom: '20px' }}>
-        <TextField
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: '10px',
+        marginBottom: '20px',
+      }}>
+        <CustomDatePicker
           label="Start Date"
-          type="date"
           value={startDate}
-          onChange={e => setStartDate(e.target.value)}
-          style={{
-            marginRight: '10px',
-            backgroundColor: isDarkMode ? '#333' : '#fff',
-          }}
+          onChange={setStartDate}
+          isDarkMode={isDarkMode}
         />
-        <TextField
+        <CustomDatePicker
           label="End Date"
-          type="date"
           value={endDate}
-          onChange={e => setEndDate(e.target.value)}
-          style={{
-            backgroundColor: isDarkMode ? '#333' : '#fff',
-          }}
-        />
-        <CustomButton
-          label="Search"
-          onClick={handleFetchCars}
+          onChange={setEndDate}
+          isDarkMode={isDarkMode}
         />
       </div>
+      <CustomButton
+        label="Search"
+        onClick={handleFetchCars}
+      />
       <TableContainer component={Paper} style={{ backgroundColor: isDarkMode ? '#333' : '#fff' }}>
         <Table>
           <TableHead>

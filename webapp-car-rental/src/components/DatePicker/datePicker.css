@@ -1,0 +1,25 @@
+.custom-date-picker-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.custom-date-picker-message {
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.custom-date-picker {
+    width: 100%;
+}
+
+.custom-date-picker.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+.custom-date-picker.light-mode {
+    background-color: #fff;
+    color: #000;
+}

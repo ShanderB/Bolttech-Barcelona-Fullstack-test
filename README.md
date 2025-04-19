@@ -28,6 +28,7 @@ I developed both the frontend and backend for this project. Here are some key po
 - I used React Context to manage the dark theme. I didn't find a compelling use case for Context in this project, and using Redux felt unnecessary for the scope.
 - I focused on componentization, creating separate components for each action. This approach ensures that only necessary components re-render, which is beneficial for complex systems (not this one).
 - All components are properly typed and include validations.
+- I am using browser cookies to persist the dark mode setting.
 
 ### General
 - I followed the SOLID principles for both frontend and backend development.

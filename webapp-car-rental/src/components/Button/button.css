@@ -1,0 +1,16 @@
+.custom-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.cancel-button {
+    background-color: #f44336 !important;
+    color: #fff !important;
+}
+
+.normal-button {
+    background-color: #1976d2 !important;
+    color: #fff !important;
+}

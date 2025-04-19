@@ -1,8 +1,9 @@
 import './success.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTheme } from '../../shared/ThemeContext';
-import { Card, CardContent, Typography, Button } from '@mui/material';
+import { Card, CardContent, Typography } from '@mui/material';
 import { SuccessPageLocationState } from './Types/Success';
+import CustomButton from '../../components/Button/CustomButton';
 
 const SuccessPage = () => {
     const navigate = useNavigate();
@@ -27,14 +28,10 @@ const SuccessPage = () => {
                     ) : (
                         <Typography>No car details available.</Typography>
                     )}
-                    <Button
-                        variant="contained"
-                        color="primary"
+                    <CustomButton
+                        label="Go Back to Home"
                         onClick={() => navigate('/')}
-                        className="success-button"
-                    >
-                        Go Back to Home
-                    </Button>
+                    />
                 </CardContent>
             </Card>
         </div>

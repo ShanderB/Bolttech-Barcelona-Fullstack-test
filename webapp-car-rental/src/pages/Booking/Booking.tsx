@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../../shared/ThemeContext';
 import {
-  Button,
   Checkbox,
   FormControlLabel,
   TextField,
@@ -12,6 +11,7 @@ import {
 } from '@mui/material';
 import { createBooking } from '../../services/booking-service';
 import { BookingPageProps } from './Types/BookingType';
+import CustomButton from '../../components/Button/CustomButton';
 
 const BookingPage: React.FC<BookingPageProps> = ({ car, startDate, endDate, closeModal }) => {
   const [formData, setFormData] = useState({
@@ -55,8 +55,10 @@ const BookingPage: React.FC<BookingPageProps> = ({ car, startDate, endDate, clos
             fullWidth
             required
             className="text-field"
-            InputProps={{
-              className: isDarkMode ? 'dark-input' : 'light-input',
+            slotProps={{
+              input: {
+                className: isDarkMode ? 'dark-input' : 'light-input',
+              },
             }}
           />
           <FormControlLabel
@@ -71,12 +73,15 @@ const BookingPage: React.FC<BookingPageProps> = ({ car, startDate, endDate, clos
           />
         </form>
         <div className="booking-buttons">
-          <Button variant="contained" color="primary" onClick={handleSubmit}>
-            Confirm Booking
-          </Button>
-          <Button variant="outlined" color="primary" onClick={closeModal}>
-            Cancel
-          </Button>
+          <CustomButton
+            label="Confirm Booking"
+            onClick={handleSubmit}
+          />
+          <CustomButton
+            label="Cancel"
+            onClick={closeModal}
+            isCancel
+          />
         </div>
       </Paper>
     </div>

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import BookingPage from '../Booking/Booking';
 import { useTheme } from '../../shared/ThemeContext';
 import {
-  Button,
   Table,
   TableBody,
   TableCell,
@@ -16,6 +15,7 @@ import {
 } from '@mui/material';
 import { fetchCars } from '../../services/car-service';
 import { Car } from './Types/HomeType';
+import CustomButton from '../../components/Button/CustomButton';
 
 
 const HomePage = () => {
@@ -74,9 +74,10 @@ const HomePage = () => {
             backgroundColor: isDarkMode ? '#333' : '#fff',
           }}
         />
-        <Button variant="contained" color="primary" onClick={handleFetchCars} style={{ marginLeft: '10px' }}>
-          Search
-        </Button>
+        <CustomButton
+          label="Search"
+          onClick={handleFetchCars}
+        />
       </div>
       <TableContainer component={Paper} style={{ backgroundColor: isDarkMode ? '#333' : '#fff' }}>
         <Table>

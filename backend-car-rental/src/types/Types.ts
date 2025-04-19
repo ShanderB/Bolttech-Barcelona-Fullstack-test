@@ -8,6 +8,7 @@ export interface CarType {
         mid: number;
         off: number;
     };
+    carBase64: string; 
 }
 
 export interface BookingType {
@@ -18,7 +19,7 @@ export interface BookingType {
     licenseValid: boolean;
 }
 
-export interface CarWithPrices extends Omit<CarType, 'stock' | 'prices'> {
+export interface CarWithPrices extends Omit<CarType, 'stock' | 'prices' | 'carBase64'> {
     price: number;
     totalPrice: number;
     stock: boolean;

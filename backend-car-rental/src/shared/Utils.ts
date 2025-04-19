@@ -19,6 +19,7 @@ export const calculateCarPrices = (
             stock: car.stock! > 0 ? true : false,
             price: dailyPrice,
             totalPrice,
+            carBase64: car.carBase64,
         };
     });
 };

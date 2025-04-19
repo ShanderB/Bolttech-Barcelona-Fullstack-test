@@ -3,13 +3,15 @@ import Car from '../models/Car-model';
 import { CarType } from '../types/Types';
 import { Request, Response } from 'express';
 
-export const getCars = async (req: Request, res: Response): Promise<Response> => {
+export const getCars = async (req: Request, res: Response): Promise<void> => {
   const { startDate, endDate } = req.query;
 
   if (!startDate || !endDate) {
-    return res.status(400).json({ message: 'Start date and end date are required' });
+    res.status(400).json({ message: 'Start date and end date are required' });
+    return;
   } else if (startDate > endDate) {
-    return res.status(400).json({ message: 'Start date cannot be greater than end date' });
+    res.status(400).json({ message: 'Start date cannot be greater than end date' });
+    return;
   }
 
   const { start, end, season } = parseDatesAndSeason(startDate as string, endDate as string);
@@ -17,12 +19,13 @@ export const getCars = async (req: Request, res: Response): Promise<Response> =>
   const cars = await Car.find<CarType>();
 
   if (!cars || cars.length === 0) {
-    return res.status(404).json({ message: 'No cars found' });
+    res.status(404).json({ message: 'No cars found' });
+    return;
   }
 
   const carsWithPrices = calculateCarPrices(cars, season, start, end);
 
-  return res.status(200).json(carsWithPrices);
+  res.status(200).json(carsWithPrices);
 };
 
 export const decrementCarStock = async (carId: string): Promise<string | undefined> => {

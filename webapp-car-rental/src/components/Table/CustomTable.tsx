@@ -23,7 +23,7 @@ const CustomTable = <T extends { [key: string]: any }>({
         setIsDragging(false);
     };
 
-    const handleMouseMove = () => { 
+    const handleMouseMove = () => {
         setIsDragging(true);
     };
 
@@ -38,7 +38,11 @@ const CustomTable = <T extends { [key: string]: any }>({
             component={Paper}
             style={{ backgroundColor: isDarkMode ? TableColors.DarkBackground : TableColors.LightBackground }}
         >
-            <Table>
+            <Table
+                style={{
+                    tableLayout: 'fixed',
+                }}
+            >
                 <TableHead>
                     <TableRow>
                         {columns.map((column) => (
@@ -91,8 +95,21 @@ const CustomTable = <T extends { [key: string]: any }>({
                                 <TableCell key={String(column.key)} style={{
                                     borderBottom: 'none',
                                     color: isDarkMode ? TableColors.TextDark : TableColors.TextLight,
+
                                 }}>
-                                    {row[column.key]}
+                                    {column.key === 'carBase64' ? (
+                                        <img
+                                            src={`data:image/svg+xml;base64,${row[column.key]}`}
+                                            style={{
+                                                maxWidth: '31%',
+                                                height: 'auto',
+                                                maxHeight: '10%',
+                                            }}
+                                            alt="SVG"
+                                        />
+                                    ) : (
+                                        row[column.key]
+                                    )}
                                 </TableCell>
                             ))}
                         </TableRow>

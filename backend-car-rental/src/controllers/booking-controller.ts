@@ -2,11 +2,11 @@ import Booking from '../models/Book-model';
 import { decrementCarStock } from './Cars-controller';
 import { Request, Response } from 'express';
 
-export const createBooking = async (req: Request, res: Response): Promise<Response> => {
+export const createBooking = async (req: Request, res: Response): Promise<void> => {
   const { carId, userId, startDate, endDate, licenseValid } = req.body;
 
   if (!carId || !userId || !startDate || !endDate || licenseValid === undefined) {
-    return res.status(400).json({ message: 'All fields are required' });
+    res.status(400).json({ message: 'All fields are required' });
   }
 
   const start = new Date(startDate);
@@ -15,11 +15,11 @@ export const createBooking = async (req: Request, res: Response): Promise<Respon
   //TODO add function to validate everything and add error messages
 
   if (start >= end) {
-    return res.status(400).json({ message: 'Start date must be before end date' });
+    res.status(400).json({ message: 'Start date must be before end date' });
   }
 
   if (!licenseValid) {
-    return res.status(400).json({ message: 'Driving license must be valid' });
+    res.status(400).json({ message: 'Driving license must be valid' });
   }
 
   const existingBooking = await Booking.findOne({
@@ -31,7 +31,7 @@ export const createBooking = async (req: Request, res: Response): Promise<Respon
   });
 
   if (existingBooking) {
-    return res.status(400).json({ message: 'User already has a booking for the selected dates' });
+    res.status(400).json({ message: 'User already has a booking for the selected dates' });
   }
 
   // const session = await mongoose.startSession();
@@ -62,8 +62,9 @@ export const createBooking = async (req: Request, res: Response): Promise<Respon
   const decrementErrorMessage = await decrementCarStock(carId);
 
   if (decrementErrorMessage) {
-    return res.status(400).json({ message: decrementErrorMessage });
+    res.status(400).json({ message: decrementErrorMessage });
+    return;
   }
 
-  return res.status(201).json({ message: 'Booking created' });
+  res.status(201).json({ message: 'Booking created' });
 };

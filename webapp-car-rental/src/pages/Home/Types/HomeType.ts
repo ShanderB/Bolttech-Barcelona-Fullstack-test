@@ -5,6 +5,7 @@ export interface Car {
     price: number;
     stock: boolean;
     totalPrice: number;
+    carBase64: string;
 }
 
 export interface HomePageState {

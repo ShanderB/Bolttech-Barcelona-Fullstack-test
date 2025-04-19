@@ -9,6 +9,11 @@ const carSchema = new Schema({
     mid: Number,
     off: Number,
   },
-});
+  carBase64: String,
+  },
+  {
+    timestamps: true,
+  }
+);
 
 export default model('Car', carSchema);

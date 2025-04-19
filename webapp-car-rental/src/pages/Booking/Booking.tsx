@@ -1,8 +1,10 @@
+import './booking.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './booking.css';
+import { useTheme } from '../../shared/ThemeContext';
 
+//tODO
 interface BookingPageProps {
   car: {
     _id: number;
@@ -23,6 +25,7 @@ const BookingPage: React.FC<BookingPageProps> = ({ car, startDate, endDate, clos
   });
 
   const navigate = useNavigate();
+  const { isDarkMode } = useTheme();
 
   const handleSubmit = async () => {
     try {
@@ -33,7 +36,7 @@ const BookingPage: React.FC<BookingPageProps> = ({ car, startDate, endDate, clos
         endDate,
         licenseValid: formData.licenseValid,
       });
-      navigate('/success', { state: { car } }); 
+      navigate('/success', { state: { car } });
     } catch (error) {
       console.error('Error creating booking:', error);
       alert('Failed to create booking.');
@@ -41,7 +44,7 @@ const BookingPage: React.FC<BookingPageProps> = ({ car, startDate, endDate, clos
   };
 
   return (
-    <div className="modal">
+    <div className={`modal ${isDarkMode ? 'dark' : ''}`}>
       <div className="modal-content">
         <h2>Confirm Booking</h2>
         <p><strong>Brand:</strong> {car.brand}</p>

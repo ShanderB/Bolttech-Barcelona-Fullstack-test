@@ -1,4 +1,4 @@
-.modal {
+.booking-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -8,62 +8,53 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.modal-content {
-    background: white;
+  }
+  
+  .booking-paper {
     padding: 20px;
-    border-radius: 5px;
-    width: 400px;
-    text-align: center;
-}
-
-.booking-button,
-.close-button {
-    padding: 10px 20px;
-    margin: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.booking-button {
-    background-color: #28a745;
-    color: white;
-}
-
-.booking-button:hover {
-    background-color: #218838;
-}
-
-.close-button {
-    background-color: #dc3545;
-    color: white;
-}
-
-.close-button:hover {
-    background-color: #c82333;
-}
-
-body.dark .modal-content {
-    background-color: #121212;
-    color: white;
-}
-
-body.dark .booking-button {
-    background-color: #28a745;
-    color: white;
-}
-
-body.dark .booking-button:hover {
-    background-color: #218838;
-}
-
-body.dark .close-button {
-    background-color: #dc3545;
-    color: white;
-}
-
-body.dark .close-button:hover {
-    background-color: #c82333;
-}
+    border-radius: 8px;
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  .booking-paper.dark-mode {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .booking-paper.light-mode {
+    background-color: #fff;
+    color: #000;
+  }
+  
+  .booking-form {
+    margin-top: 20px;
+  }
+  
+  .text-field {
+    margin-bottom: 20px;
+  }
+  
+  .dark-input {
+    background-color: #444;
+    color: #fff;
+  }
+  
+  .light-input {
+    background-color: #fff;
+    color: #000;
+  }
+  
+  .dark-checkbox {
+    color: #fff;
+  }
+  
+  .light-checkbox {
+    color: #000;
+  }
+  
+  .booking-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }

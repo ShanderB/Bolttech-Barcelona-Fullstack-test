@@ -1,3 +1,4 @@
+import './booking.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -50,29 +51,8 @@ const BookingPage: React.FC<BookingPageProps> = ({ car, startDate, endDate, clos
   };
 
   return (
-    <div
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <Paper
-        style={{
-          padding: '20px',
-          borderRadius: '8px',
-          maxWidth: '400px',
-          width: '100%',
-          backgroundColor: isDarkMode ? '#333' : '#fff',
-          color: isDarkMode ? '#fff' : '#000',
-        }}
-      >
+    <div className="booking-overlay">
+      <Paper className={`booking-paper ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
         <Typography variant="h5" gutterBottom>
           Confirm Booking
         </Typography>
@@ -94,7 +74,7 @@ const BookingPage: React.FC<BookingPageProps> = ({ car, startDate, endDate, clos
         <Typography>
           <strong>End Date:</strong> {endDate}
         </Typography>
-        <form style={{ marginTop: '20px' }}>
+        <form className="booking-form">
           <TextField
             label="User ID"
             placeholder="Enter your User ID"
@@ -102,12 +82,9 @@ const BookingPage: React.FC<BookingPageProps> = ({ car, startDate, endDate, clos
             onChange={(e) => setFormData({ ...formData, userId: e.target.value })}
             fullWidth
             required
-            style={{
-              marginBottom: '20px',
-              backgroundColor: isDarkMode ? '#444' : '#fff',
-            }}
+            className="text-field"
             InputProps={{
-              style: { color: isDarkMode ? '#fff' : '#000' },
+              className: isDarkMode ? 'dark-input' : 'light-input',
             }}
           />
           <FormControlLabel
@@ -115,13 +92,13 @@ const BookingPage: React.FC<BookingPageProps> = ({ car, startDate, endDate, clos
               <Checkbox
                 checked={formData.licenseValid}
                 onChange={(e) => setFormData({ ...formData, licenseValid: e.target.checked })}
-                style={{ color: isDarkMode ? '#fff' : '#000' }}
+                className={isDarkMode ? 'dark-checkbox' : 'light-checkbox'}
               />
             }
             label="License Valid"
           />
         </form>
-        <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between' }}>
+        <div className="booking-buttons">
           <Button variant="contained" color="primary" onClick={handleSubmit}>
             Confirm Booking
           </Button>

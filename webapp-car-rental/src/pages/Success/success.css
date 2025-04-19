@@ -1,47 +1,33 @@
 .success-container {
-  text-align: center;
-  margin-top: 50px;
-  font-family: Arial, sans-serif;
-}
-
-.success-container h1 {
-  color: #28a745;
-  font-size: 2.5rem;
-}
-
-.success-container p {
-  font-size: 1.2rem;
-  margin: 20px 0;
-}
-
-.home-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-}
-
-.home-button:hover {
-  background-color: #0056b3;
-}
-
-body.dark .success-container {
-  background-color: #121212;
-  color: white;
-}
-
-body.dark .success-container h1 {
-  color: #28a745;
-}
-
-body.dark .home-button {
-  background-color: #007bff;
-  color: white;
-}
-
-body.dark .home-button:hover {
-  background-color: #0056b3;
-}
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .success-container.dark-mode {
+    background-color: #121212;
+    color: #fff;
+  }
+  
+  .success-container.light-mode {
+    background-color: #fff;
+    color: #000;
+  }
+  
+  .success-card {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .success-card.dark-mode {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .success-card.light-mode {
+    background-color: #fff;
+    color: #000;
+  }
+  
+  .success-button {
+    margin-top: 20px;
+  }

@@ -104,7 +104,7 @@ const HomePage = () => {
                 onClick={() => car.stock ? handleCarClick(car) : undefined}
                 style={{
                   cursor: car.stock ? 'pointer' : 'not-allowed',
-                  backgroundColor: car.stock ? (isDarkMode ? '#444' : '#f5f5f5') : '#d3d3d3',
+                  backgroundColor: car.stock ? (isDarkMode ? '#444' : '#f5f5f5') : '#333',
                   color: isDarkMode ? '#fff' : '#000',
                 }}
                 onMouseEnter={(e) => {

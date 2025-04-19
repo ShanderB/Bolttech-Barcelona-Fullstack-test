@@ -27,8 +27,11 @@ const HomePage = () => {
       return;
     }
 
-    const carsData = await fetchCars(startDate, endDate);
-    setCars(carsData);
+     await fetchCars(startDate, endDate).then((response) => {
+      setCars(response);
+    }).catch((error) => {
+      alert('Failed to fetch cars. Please try again later.');
+    });
   };
 
   const handleCarClick = (car: Car) => {
@@ -90,7 +93,7 @@ const HomePage = () => {
           { key: 'model', label: 'Model' },
           { key: 'price', label: 'Price' },
           { key: 'totalPrice', label: 'Total Price' },
-          { key: 'carBase64', label: 'Car Image (Base64)' }, 
+          { key: 'carBase64', label: 'Car Image (Base64)' },
         ]}
         onRowClick={(car) => car.stock && handleCarClick(car)}
         isDarkMode={isDarkMode}

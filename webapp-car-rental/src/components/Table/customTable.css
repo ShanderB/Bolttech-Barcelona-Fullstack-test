@@ -1,0 +1,8 @@
+.custom-table-container {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.custom-table-row:hover {
+    background-color: #e0e0e0;
+}

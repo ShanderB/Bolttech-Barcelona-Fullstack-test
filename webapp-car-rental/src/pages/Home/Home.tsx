@@ -2,20 +2,14 @@ import { useState } from 'react';
 import BookingPage from '../Booking/Booking';
 import { useTheme } from '../../shared/ThemeContext';
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
   Typography,
-  Paper,
   Switch,
 } from '@mui/material';
 import { fetchCars } from '../../services/car-service';
 import { Car } from './Types/HomeType';
 import CustomButton from '../../components/Button/CustomButton';
 import CustomDatePicker from '../../components/DatePicker/CustomDatePicker';
+import CustomTable from '../../components/Table/CustomTable';
 
 
 const HomePage = () => {
@@ -78,46 +72,17 @@ const HomePage = () => {
         label="Search"
         onClick={handleFetchCars}
       />
-      <TableContainer component={Paper} style={{ backgroundColor: isDarkMode ? '#333' : '#fff' }}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell style={{ borderBottom: 'none' }}>Brand</TableCell>
-              <TableCell style={{ borderBottom: 'none' }}>Model</TableCell>
-              <TableCell style={{ borderBottom: 'none' }}>Price</TableCell>
-              <TableCell style={{ borderBottom: 'none' }}>Total Price</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {cars.map(car => (
-              <TableRow
-                key={car._id}
-                onClick={() => car.stock ? handleCarClick(car) : undefined}
-                style={{
-                  cursor: car.stock ? 'pointer' : 'not-allowed',
-                  backgroundColor: car.stock ? (isDarkMode ? '#444' : '#f5f5f5') : '#333',
-                  color: isDarkMode ? '#fff' : '#000',
-                }}
-                onMouseEnter={(e) => {
-                  if (car.stock) {
-                    e.currentTarget.style.backgroundColor = isDarkMode ? '#555' : '#e0e0e0';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (car.stock) {
-                    e.currentTarget.style.backgroundColor = isDarkMode ? '#444' : '#f5f5f5';
-                  }
-                }}
-              >
-                <TableCell style={{ borderBottom: 'none' }}>{car.brand}</TableCell>
-                <TableCell style={{ borderBottom: 'none' }}>{car.model}</TableCell>
-                <TableCell style={{ borderBottom: 'none' }}>${car.price}</TableCell>
-                <TableCell style={{ borderBottom: 'none' }}>${car.totalPrice}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <CustomTable
+        data={cars}
+        columns={[
+          { key: 'brand', label: 'Brand' },
+          { key: 'model', label: 'Model' },
+          { key: 'price', label: 'Price' },
+          { key: 'totalPrice', label: 'Total Price' },
+        ]}
+        onRowClick={(car) => car.stock && handleCarClick(car)}
+        isDarkMode={isDarkMode}
+      />
 
       {isModalOpen && selectedCar && (
         <BookingPage

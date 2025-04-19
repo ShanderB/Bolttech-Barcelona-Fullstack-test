@@ -8,15 +8,15 @@ import { Car, HomeColors } from './Types/HomeType';
 import CustomButton from '../../components/Button/CustomButton';
 import CustomDatePicker from '../../components/DatePicker/CustomDatePicker';
 import CustomTable from '../../components/Table/CustomTable';
-import { FormControlLabel, Switch, useTheme as useMuiTheme } from '@mui/material';
+import { Switch } from '@mui/material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 
 const HomePage = () => {
   const [cars, setCars] = useState<Car[]>([]);
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [startDate, setStartDate] = useState('2025-01-01');
+  const [endDate, setEndDate] = useState('2025-01-02');
   const [selectedCar, setSelectedCar] = useState<Car | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { isDarkMode, toggleTheme } = useTheme();

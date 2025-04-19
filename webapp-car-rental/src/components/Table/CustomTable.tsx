@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import './customTable.css';
 import { CustomTableProps, TableColors } from './Types/TableTypes';
+import { useState } from 'react';
 
 const CustomTable = <T extends { [key: string]: any }>({
     data,
@@ -16,6 +17,22 @@ const CustomTable = <T extends { [key: string]: any }>({
     onRowClick,
     isDarkMode = false,
 }: CustomTableProps<T>) => {
+    const [isDragging, setIsDragging] = useState(false);
+
+    const handleMouseDown = () => {
+        setIsDragging(false);
+    };
+
+    const handleMouseMove = () => { 
+        setIsDragging(true);
+    };
+
+    const handleMouseUp = (row: T) => {
+        if (!isDragging && row.stock && onRowClick) {
+            onRowClick(row);
+        }
+    };
+
     return (
         <TableContainer
             component={Paper}
@@ -41,9 +58,9 @@ const CustomTable = <T extends { [key: string]: any }>({
                     {data.map((row, index) => (
                         <TableRow
                             key={index}
-                            onClick={() => {
-                                if (row.stock && onRowClick) onRowClick(row);
-                            }}
+                            onMouseDown={handleMouseDown}
+                            onMouseMove={handleMouseMove}
+                            onMouseUp={() => handleMouseUp(row)}
                             style={{
                                 cursor: row.stock ? 'pointer' : 'not-allowed',
                                 backgroundColor: row.stock

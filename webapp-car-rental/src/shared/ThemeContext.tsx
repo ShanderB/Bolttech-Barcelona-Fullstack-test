@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 
-//todo
 interface ThemeContextProps {
   isDarkMode: boolean;
   toggleTheme: () => void;

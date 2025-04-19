@@ -2,12 +2,13 @@ import './success.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTheme } from '../../shared/ThemeContext';
 import { Card, CardContent, Typography, Button } from '@mui/material';
+import { SuccessPageLocationState } from './Types/Success';
 
 const SuccessPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { isDarkMode } = useTheme();
-    const car = location.state?.car;
+    const car = (location.state as SuccessPageLocationState)?.car;
 
     return (
         <div className={`success-container ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>

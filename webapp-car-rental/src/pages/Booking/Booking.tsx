@@ -11,19 +11,7 @@ import {
   Paper,
 } from '@mui/material';
 import { createBooking } from '../../services/booking-service';
-
-interface BookingPageProps {
-  car: {
-    _id: number;
-    brand: string;
-    model: string;
-    price: number;
-    totalPrice: number;
-  };
-  startDate: string;
-  endDate: string;
-  closeModal: () => void;
-}
+import { BookingPageProps } from './Types/BookingType';
 
 const BookingPage: React.FC<BookingPageProps> = ({ car, startDate, endDate, closeModal }) => {
   const [formData, setFormData] = useState({

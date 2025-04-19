@@ -15,15 +15,8 @@ import {
   Switch,
 } from '@mui/material';
 import { fetchCars } from '../../services/car-service';
+import { Car } from './Types/HomeType';
 
-interface Car {
-  _id: number;
-  brand: string;
-  model: string;
-  price: number;
-  stock: boolean;
-  totalPrice: number;
-}
 
 const HomePage = () => {
   const [cars, setCars] = useState<Car[]>([]);

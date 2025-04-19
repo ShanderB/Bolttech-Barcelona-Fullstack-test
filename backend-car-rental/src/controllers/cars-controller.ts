@@ -26,6 +26,7 @@ export const getCars = async (req: Request, res: Response): Promise<void> => {
   const carsWithPrices = calculateCarPrices(cars, season, start, end);
 
   res.status(200).json(carsWithPrices);
+  return;
 };
 
 export const decrementCarStock = async (carId: string): Promise<string | undefined> => {

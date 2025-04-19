@@ -7,19 +7,20 @@ export const createBooking = async (req: Request, res: Response): Promise<void> 
 
   if (!carId || !userId || !startDate || !endDate || licenseValid === undefined) {
     res.status(400).json({ message: 'All fields are required' });
+    return
   }
 
   const start = new Date(startDate);
   const end = new Date(endDate);
 
-  //TODO add function to validate everything and add error messages
-
   if (start >= end) {
     res.status(400).json({ message: 'Start date must be before end date' });
+    return
   }
 
   if (!licenseValid) {
     res.status(400).json({ message: 'Driving license must be valid' });
+    return
   }
 
   const existingBooking = await Booking.findOne({
@@ -32,6 +33,7 @@ export const createBooking = async (req: Request, res: Response): Promise<void> 
 
   if (existingBooking) {
     res.status(400).json({ message: 'User already has a booking for the selected dates' });
+    return
   }
 
   // const session = await mongoose.startSession();
@@ -63,8 +65,10 @@ export const createBooking = async (req: Request, res: Response): Promise<void> 
 
   if (decrementErrorMessage) {
     res.status(400).json({ message: decrementErrorMessage });
-    return;
+    return
+    ;
   }
 
   res.status(201).json({ message: 'Booking created' });
+  return
 };

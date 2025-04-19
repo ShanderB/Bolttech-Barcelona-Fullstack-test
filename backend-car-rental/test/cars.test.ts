@@ -145,7 +145,6 @@ describe('decrementCarStock', () => {
         expect(result).not.toBe('Car not found or not available');
 
         const updatedCar = await Car.find({ _id: '1' });
-        console.log(updatedCar[0].stock)
         expect(updatedCar[0].stock).toBe(2);
     });
 

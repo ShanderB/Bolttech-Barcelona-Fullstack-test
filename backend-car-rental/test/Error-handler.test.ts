@@ -5,6 +5,14 @@ describe('errorHandler middleware', () => {
     let mockRequest: Partial<Request>;
     let mockResponse: Partial<Response>;
     let mockNext: NextFunction;
+    let consoleErrorSpy: jest.SpyInstance;
+
+    const setNodeEnv = (env: string) => {
+        Object.defineProperty(process, 'env', {
+            value: { ...process.env, NODE_ENV: env },
+            writable: true,
+        });
+    };
 
     beforeEach(() => {
         mockRequest = {};
@@ -13,10 +21,16 @@ describe('errorHandler middleware', () => {
             json: jest.fn(),
         };
         mockNext = jest.fn();
+
+        consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => { });
     });
 
-    it('should log the error and return a 500 status with a generic message in production', () => {
-        process.env.NODE_ENV = 'production';
+    afterEach(() => {
+        consoleErrorSpy.mockRestore();
+    });
+
+    it('should return generic error message in production', () => {
+        setNodeEnv('production');
         const error = new Error('Test error');
 
         errorHandler(error, mockRequest as Request, mockResponse as Response, mockNext);
@@ -27,8 +41,8 @@ describe('errorHandler middleware', () => {
         });
     });
 
-    it('should log the error and return a 500 status with detailed error in development', () => {
-        process.env.NODE_ENV = 'development';
+    it('should return detailed error in development', () => {
+        setNodeEnv('development');
         const error = new Error('Test error');
 
         errorHandler(error, mockRequest as Request, mockResponse as Response, mockNext);
@@ -41,7 +55,7 @@ describe('errorHandler middleware', () => {
     });
 
     it('should handle non-Error objects gracefully', () => {
-        process.env.NODE_ENV = 'development';
+        setNodeEnv('development');
         const error = 'String error';
 
         errorHandler(error, mockRequest as Request, mockResponse as Response, mockNext);

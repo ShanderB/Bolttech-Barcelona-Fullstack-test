@@ -8,7 +8,7 @@ import {
     Paper,
 } from '@mui/material';
 import './customTable.css';
-import { CustomTableProps } from './Types/TableTypes';
+import { CustomTableProps, TableColors } from './Types/TableTypes';
 
 const CustomTable = <T extends { [key: string]: any }>({
     data,
@@ -17,14 +17,20 @@ const CustomTable = <T extends { [key: string]: any }>({
     isDarkMode = false,
 }: CustomTableProps<T>) => {
     return (
-        <TableContainer component={Paper} style={{ backgroundColor: isDarkMode ? '#333' : '#fff' }}>
+        <TableContainer
+            component={Paper}
+            style={{ backgroundColor: isDarkMode ? TableColors.DarkBackground : TableColors.LightBackground }}
+        >
             <Table>
                 <TableHead>
                     <TableRow>
                         {columns.map((column) => (
                             <TableCell
                                 key={String(column.key)}
-                                style={{ borderBottom: 'none', color: isDarkMode ? '#fff' : '#000' }}
+                                style={{
+                                    borderBottom: 'none',
+                                    color: isDarkMode ? TableColors.TextDark : TableColors.TextLight,
+                                }}
                             >
                                 {column.label}
                             </TableCell>
@@ -41,25 +47,34 @@ const CustomTable = <T extends { [key: string]: any }>({
                             style={{
                                 cursor: row.stock ? 'pointer' : 'not-allowed',
                                 backgroundColor: row.stock
-                                    ? (isDarkMode ? '#444' : '#f5f5f5')
-                                    : (isDarkMode ? '#333' : '#ddd'),
-                                color: isDarkMode ? '#fff' : '#000',
+                                    ? (isDarkMode ? TableColors.DarkRow : TableColors.LightRow)
+                                    : (isDarkMode ? TableColors.DisabledDark : TableColors.DisabledLight),
+                                color: isDarkMode ? TableColors.TextDark : TableColors.TextLight,
                             }}
                             onMouseEnter={(e) => {
                                 if (row.stock) {
-                                    e.currentTarget.style.backgroundColor = isDarkMode ? '#555' : '#e0e0e0';
+                                    e.currentTarget.style.backgroundColor = isDarkMode
+                                        ? TableColors.DarkHover
+                                        : TableColors.LightHover;
                                 }
                             }}
                             onMouseLeave={(e) => {
                                 if (row.stock) {
-                                    e.currentTarget.style.backgroundColor = isDarkMode ? '#444' : '#f5f5f5';
+                                    e.currentTarget.style.backgroundColor = isDarkMode
+                                        ? TableColors.DarkRow
+                                        : TableColors.LightRow;
                                 } else {
-                                    e.currentTarget.style.backgroundColor = isDarkMode ? '#333' : '#ddd';
+                                    e.currentTarget.style.backgroundColor = isDarkMode
+                                        ? TableColors.DisabledDark
+                                        : TableColors.DisabledLight;
                                 }
                             }}
                         >
                             {columns.map((column) => (
-                                <TableCell key={String(column.key)} style={{ borderBottom: 'none' }}>
+                                <TableCell key={String(column.key)} style={{
+                                    borderBottom: 'none',
+                                    color: isDarkMode ? TableColors.TextDark : TableColors.TextLight,
+                                }}>
                                     {row[column.key]}
                                 </TableCell>
                             ))}

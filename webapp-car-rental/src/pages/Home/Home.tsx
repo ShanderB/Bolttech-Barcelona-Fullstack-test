@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 import BookingPage from '../Booking/Booking';
 import { useTheme } from '../../shared/ThemeContext';
 import {
@@ -15,6 +14,7 @@ import {
   Paper,
   Switch,
 } from '@mui/material';
+import { fetchCars } from '../../services/car-service';
 
 interface Car {
   _id: number;
@@ -33,16 +33,14 @@ const HomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { isDarkMode, toggleTheme } = useTheme();
 
-  const fetchCars = () => {
+  const handleFetchCars = async () => {
     if (!startDate || !endDate) {
       alert('Please select both start and end dates.');
       return;
     }
 
-    axios
-      .get(`http://localhost:5000/api/cars?startDate=${startDate}&endDate=${endDate}`)
-      .then(response => setCars(response.data))
-      .catch(error => console.error('Error fetching cars:', error));
+    const carsData = await fetchCars(startDate, endDate);
+    setCars(carsData);
   };
 
   const handleCarClick = (car: Car) => {
@@ -83,7 +81,7 @@ const HomePage = () => {
             backgroundColor: isDarkMode ? '#333' : '#fff',
           }}
         />
-        <Button variant="contained" color="primary" onClick={fetchCars} style={{ marginLeft: '10px' }}>
+        <Button variant="contained" color="primary" onClick={handleFetchCars} style={{ marginLeft: '10px' }}>
           Search
         </Button>
       </div>

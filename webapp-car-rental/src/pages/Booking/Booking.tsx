@@ -1,7 +1,6 @@
 import './booking.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { useTheme } from '../../shared/ThemeContext';
 import {
   Button,
@@ -11,6 +10,7 @@ import {
   Typography,
   Paper,
 } from '@mui/material';
+import { createBooking } from '../../services/booking-service';
 
 interface BookingPageProps {
   car: {
@@ -35,19 +35,14 @@ const BookingPage: React.FC<BookingPageProps> = ({ car, startDate, endDate, clos
   const { isDarkMode } = useTheme();
 
   const handleSubmit = async () => {
-    try {
-      await axios.post('http://localhost:5000/api/bookings', {
-        carId: car._id,
-        userId: formData.userId,
-        startDate,
-        endDate,
-        licenseValid: formData.licenseValid,
-      });
-      navigate('/success', { state: { car } });
-    } catch (error) {
-      console.error('Error creating booking:', error);
-      alert('Failed to create booking.');
-    }
+    await createBooking({
+      carId: car._id,
+      userId: formData.userId,
+      startDate,
+      endDate,
+      licenseValid: formData.licenseValid,
+    });
+    navigate('/success', { state: { car } });
   };
 
   return (

@@ -1,10 +1,16 @@
-import './booking.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useTheme } from '../../shared/ThemeContext';
+import {
+  Button,
+  Checkbox,
+  FormControlLabel,
+  TextField,
+  Typography,
+  Paper,
+} from '@mui/material';
 
-//tODO
 interface BookingPageProps {
   car: {
     _id: number;
@@ -44,38 +50,86 @@ const BookingPage: React.FC<BookingPageProps> = ({ car, startDate, endDate, clos
   };
 
   return (
-    <div className={`modal ${isDarkMode ? 'dark' : ''}`}>
-      <div className="modal-content">
-        <h2>Confirm Booking</h2>
-        <p><strong>Brand:</strong> {car.brand}</p>
-        <p><strong>Model:</strong> {car.model}</p>
-        <p><strong>Price per day:</strong> ${car.price}</p>
-        <p><strong>Total Price:</strong> ${car.totalPrice}</p>
-        <p><strong>Start Date:</strong> {startDate}</p>
-        <p><strong>End Date:</strong> {endDate}</p>
-        <form>
-          <label>
-            User ID:
-            <input
-              type="text"
-              placeholder="Enter your User ID"
-              value={formData.userId}
-              onChange={(e) => setFormData({ ...formData, userId: e.target.value })}
-              required
-            />
-          </label>
-          <label>
-            License Valid:
-            <input
-              type="checkbox"
-              checked={formData.licenseValid}
-              onChange={(e) => setFormData({ ...formData, licenseValid: e.target.checked })}
-            />
-          </label>
+    <div
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <Paper
+        style={{
+          padding: '20px',
+          borderRadius: '8px',
+          maxWidth: '400px',
+          width: '100%',
+          backgroundColor: isDarkMode ? '#333' : '#fff',
+          color: isDarkMode ? '#fff' : '#000',
+        }}
+      >
+        <Typography variant="h5" gutterBottom>
+          Confirm Booking
+        </Typography>
+        <Typography>
+          <strong>Brand:</strong> {car.brand}
+        </Typography>
+        <Typography>
+          <strong>Model:</strong> {car.model}
+        </Typography>
+        <Typography>
+          <strong>Price per day:</strong> ${car.price}
+        </Typography>
+        <Typography>
+          <strong>Total Price:</strong> ${car.totalPrice}
+        </Typography>
+        <Typography>
+          <strong>Start Date:</strong> {startDate}
+        </Typography>
+        <Typography>
+          <strong>End Date:</strong> {endDate}
+        </Typography>
+        <form style={{ marginTop: '20px' }}>
+          <TextField
+            label="User ID"
+            placeholder="Enter your User ID"
+            value={formData.userId}
+            onChange={(e) => setFormData({ ...formData, userId: e.target.value })}
+            fullWidth
+            required
+            style={{
+              marginBottom: '20px',
+              backgroundColor: isDarkMode ? '#444' : '#fff',
+            }}
+            InputProps={{
+              style: { color: isDarkMode ? '#fff' : '#000' },
+            }}
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={formData.licenseValid}
+                onChange={(e) => setFormData({ ...formData, licenseValid: e.target.checked })}
+                style={{ color: isDarkMode ? '#fff' : '#000' }}
+              />
+            }
+            label="License Valid"
+          />
         </form>
-        <button className="booking-button" onClick={handleSubmit}>Confirm Booking</button>
-        <button className="close-button" onClick={closeModal}>Cancel</button>
-      </div>
+        <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between' }}>
+          <Button variant="contained" color="primary" onClick={handleSubmit}>
+            Confirm Booking
+          </Button>
+          <Button variant="outlined" color="primary" onClick={closeModal}>
+            Cancel
+          </Button>
+        </div>
+      </Paper>
     </div>
   );
 };

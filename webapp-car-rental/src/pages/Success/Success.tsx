@@ -1,31 +1,42 @@
-import './success.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTheme } from '../../shared/ThemeContext';
+import { Card, CardContent, Typography, Button } from '@mui/material';
 
 const SuccessPage = () => {
-    const navigate = useNavigate();
-    const location = useLocation();
-    const { isDarkMode } = useTheme();
-    const car = location.state?.car;
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { isDarkMode } = useTheme();
+  const car = location.state?.car;
 
-    return (
-        <div className={`success-container ${isDarkMode ? 'dark' : ''}`}>
-            <h1>Booking Confirmed!</h1>
-            {car ? (
-                <div className="car-details">
-                    <p><strong>Brand:</strong> {car.brand}</p>
-                    <p><strong>Model:</strong> {car.model}</p>
-                    <p><strong>Price per day:</strong> ${car.price}</p>
-                    <p><strong>Total Price:</strong> ${car.totalPrice}</p>
-                </div>
-            ) : (
-                <p>No car details available.</p>
-            )}
-            <button className="home-button" onClick={() => navigate('/')}>
-                Go Back to Home
-            </button>
-        </div>
-    );
+  return (
+    <div style={{ padding: '20px', textAlign: 'center', backgroundColor: isDarkMode ? '#121212' : '#fff', color: isDarkMode ? '#fff' : '#000' }}>
+      <Card style={{ maxWidth: '400px', margin: '0 auto', backgroundColor: isDarkMode ? '#333' : '#fff', color: isDarkMode ? '#fff' : '#000' }}>
+        <CardContent>
+          <Typography variant="h5" gutterBottom>
+            Booking Confirmed!
+          </Typography>
+          {car ? (
+            <div>
+              <Typography><strong>Brand:</strong> {car.brand}</Typography>
+              <Typography><strong>Model:</strong> {car.model}</Typography>
+              <Typography><strong>Price per day:</strong> ${car.price}</Typography>
+              <Typography><strong>Total Price:</strong> ${car.totalPrice}</Typography>
+            </div>
+          ) : (
+            <Typography>No car details available.</Typography>
+          )}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => navigate('/')}
+            style={{ marginTop: '20px' }}
+          >
+            Go Back to Home
+          </Button>
+        </CardContent>
+      </Card>
+    </div>
+  );
 };
 
 export default SuccessPage;

@@ -48,27 +48,13 @@ const BookingPage: React.FC<BookingPageProps> = ({ car, startDate, endDate, clos
   return (
     <div className="booking-overlay">
       <Paper className={`booking-paper ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
-        <Typography variant="h5" gutterBottom>
-          Confirm Booking
-        </Typography>
-        <Typography>
-          <strong>Brand:</strong> {car.brand}
-        </Typography>
-        <Typography>
-          <strong>Model:</strong> {car.model}
-        </Typography>
-        <Typography>
-          <strong>Price per day:</strong> ${car.price}
-        </Typography>
-        <Typography>
-          <strong>Total Price:</strong> ${car.totalPrice}
-        </Typography>
-        <Typography>
-          <strong>Start Date:</strong> {startDate}
-        </Typography>
-        <Typography>
-          <strong>End Date:</strong> {endDate}
-        </Typography>
+        <Typography variant="h5" gutterBottom>Confirm Booking</Typography>
+        <Typography><strong>Brand:</strong> {car.brand}</Typography>
+        <Typography><strong>Model:</strong> {car.model}</Typography>
+        <Typography><strong>Price per day:</strong> ${car.price}</Typography>
+        <Typography><strong>Total Price:</strong> ${car.totalPrice}</Typography>
+        <Typography><strong>Start Date:</strong> {startDate}</Typography>
+        <Typography><strong>End Date:</strong> {endDate}</Typography>
         <form className="booking-form">
           <TextField
             label="User ID"
